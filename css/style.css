@@ -12,6 +12,7 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 90px;
+    border: 2px solid red;
 }
 
 h1 {
@@ -29,6 +30,7 @@ h1 {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
     margin-top: 100px;
+    border: 2px solid blue;
 }
 
 .photographer_section article {
@@ -37,14 +39,25 @@ h1 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    border: 2px solid green;
 }
 
 .photographer_section article h2 {
     color: #D3573C;
     font-size: 36px;
+    border: 3px solid blue;
+}
+.photographer_section article .cityCountry{
+    color: #D3573C;
+    font-weight: 700;
+}
+.photographer_section article p {
+    font-size: 10px;
 }
 
-.photographer_section article img {
+.photographer_section article img  {
     height: 200px;
     width: 200px;
+    border: 3px solid yellow;
+    border-radius: 50% ;
 }
