@@ -7,6 +7,6 @@ export class PhotographerApi {
     }
 
     async getDatas() {
-        return (await this.api.fecthData()).photographers;
+        return (await this.api.fetchData()).photographers;
     }
 }

@@ -6,7 +6,7 @@ export class Api {
         this.url=url
     }
 
-    async fecthData() {
+    async fetchData() {
         try {
             const response = await fetch(this.url);
             return await response.json();

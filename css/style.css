@@ -50,8 +50,10 @@ h1 {
 .photographer_section article .cityCountry{
     color: #D3573C;
     font-weight: 700;
+    margin: 0;
+    padding: 0;
 }
-.photographer_section article p {
+.photographer_section article span {
     font-size: 10px;
 }
 
@@ -60,4 +62,5 @@ h1 {
     width: 200px;
     border: 3px solid yellow;
     border-radius: 50% ;
+    cursor: pointer;
 }
