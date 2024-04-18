@@ -1,74 +1,87 @@
-import { PhotographerModel } from '/scripts/Model/PhotographerModel.js';
-import { PhotographerTemplate } from '/scripts/templates/PhotographerTemplate.js';
+import { PhotographerApi } from "../Api/PhotographerApi.js";
+import { MediaApi } from "../Api/MediaApi.js";
+import { PhotographerModel } from "../Model/PhotographerModel.js";
+import { PhotographerTemplate } from "../templates/PhotographerTemplate.js";
+import MediaTemplate from "../templates/MediaTemplate.js";
 
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        // Charger le fichier JSON depuis le serveur
-        const response = await fetch('./data/photographers.json');
 
-        // Vérifier si la requête a réussi
-        if (!response.ok) {
-            throw new Error('Failed to fetch photographers data');
-        }
 
-        // Convertir la réponse JSON en objet JavaScript
-        const photographersData = await response.json();
+class Photographer {
+    constructor() {
+        this.photographerApi = new PhotographerApi();
+        this.mediaApi = new MediaApi();
+    }
 
-        // Utiliser les données récupérées
-        console.log(photographersData)
+    async getPhotographer() {
+        // récupération de l'id dans l'adresse
+        const urlParams = new URLSearchParams(window.location.search);
+        const photographerId = urlParams.get('id');
+        
+        //Récupération des données du photographe
+        this.photographerData = await this.photographerApi.getDataById(photographerId);
 
-        // Parcourir les données des photographes
-        photographersData.photographers.forEach(photographerData => {
-            // Créer une instance de PhotographerModel avec les données du photographe
-            const photographer = new PhotographerModel(photographerData);
+        //Récupérations des médias du photographe
+        this.mediaDatas = await this.mediaApi.getDatasForOnePhotographe(photographerId);
+        console.log(this.mediaDatas);
+    }
+    
 
-            // Créer une instance de PhotographerTemplate avec l'instance de PhotographerModel
+    async displayData() {
+
+        if (this.photographerData && this.photographerData.id) {
+            // Instance de PhotographerModel avec les données du photographe
+            const photographer = new PhotographerModel(this.photographerData);
+    
+           
+    
+            // Instance de PhotographerTemplate avec l'instance de PhotographerModel
             const photographerTemplate = new PhotographerTemplate(photographer);
+    
+            // Détails du photographe
+            const photographerDetailsDOM = photographerTemplate.getDetailsDOM();
 
-            // Obtenir le DOM correspondant à la carte du photographe
-            const photographerCardDOM = photographerTemplate.getUserCardDOM();
-
-            // Ajouter le DOM de la carte du photographe à la page HTML
-            const photographerContainer = document.getElementById('photographer-container');
-            const sectionPhotographe = document.createElement('div')
-            sectionPhotographe.classList.add('.photographe_detail')
-
-            photographerContainer.appendChild(photographerCardDOM);
-        });
-    } catch (error) {
-        console.error('Error fetching photographers data:', error);
-    }
-});
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        // Charger le fichier JSON depuis le serveur
-        const response = await fetch('./data/photographers.json');
-        
-        // Vérifier si la requête a réussi
-        if (!response.ok) {
-            throw new Error('Failed to fetch photographers data');
+            let mediaModels=[];
+            this.mediaDatas.forEach(media => {
+                mediaModels.push(new MediaFactory(media));
+            });
+            const mediaTemplate=new MediaTemplate(mediaModels);
+            const media=mediaTemplate.showMedia();
+/*
+             // Création du conteneur pour les détails du photographe
+             const photographerDetailsContainer = document.createElement('div');
+             photographerDetailsContainer.classList.add('photographer-container');
+            // Création l'élément img pour l'image du photographe
+            const img = document.createElement('img');
+            img.setAttribute('src', photographer.portrait);
+            img.setAttribute('alt', photographer.name);
+            img.classList.add('photographer-image'); 
+    
+            // Ajout de l'image avant les détails du photographe
+            photographerDetailsContainer.appendChild(img);
+            // Ajouter les détails du photographe au conteneur
+            photographerDetailsContainer.appendChild(photographerDetailsDOM);
+    
+            // Ajout du conteneur au corps du document
+            document.getElementById('main').appendChild(photographerDetailsContainer);
+            */
+        } else {
+            console.error('Error: Photographer data is missing or incomplete.');
         }
-        
-        // Convertir la réponse JSON en objet JavaScript
-        const photographersData = await response.json();
-        
-        // Obtenir le conteneur principal
-        const mainContainer = document.querySelector('main');
-        
-        // Utiliser les données récupérées pour créer les conteneurs des photographes
-        photographersData.photographers.forEach(photographerData => {
-            // Créer l'élément div pour le photographe
-            const photographerContainer = document.createElement('div');
-            photographerContainer.id = `photographer-${photographerData.id}`;
-            photographerContainer.classList.add('photographer-container');
-            
-            // Ajouter le conteneur du photographe au conteneur principal
-            mainContainer.appendChild(photographerContainer);
-        });
-        
-        // Maintenant que les conteneurs sont créés, vous pouvez utiliser les données pour remplir chaque conteneur avec les cartes des photographes
-        // Vous pouvez utiliser une approche similaire à ce que j'ai montré dans ma réponse précédente pour remplir chaque conteneur avec les cartes des photographes
-    } catch (error) {
-        console.error('Error fetching photographers data:', error);
     }
+    
+
+    }
+
+const app = new Photographer();
+app.getPhotographer().then(() => {
+    
+    app.displayData();
 });
+
+
+
+
+        
+    
+
+    

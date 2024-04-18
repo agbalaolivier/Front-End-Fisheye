@@ -1,5 +1,6 @@
 #contact_modal {
     display: none;
+
     
 }
 
@@ -21,6 +22,7 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    border: 4px solid blue;
 }
 
 .modal {
@@ -33,6 +35,8 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    border: 1px solid green;
+
 }
 
 .modal header {
@@ -80,11 +84,15 @@ form input {
     
     height: 200px;
     width: 200px;
-    border: 3px solid yellow;
+    border: 3px solid red;
     border-radius: 50% ;
     cursor: pointer;
 }
 .photographer-container img {
     width: 200px;
     height: auto; 
+    
 }
+
+
+

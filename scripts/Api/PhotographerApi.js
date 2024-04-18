@@ -9,4 +9,9 @@ export class PhotographerApi {
     async getDatas() {
         return (await this.api.fetchData()).photographers;
     }
+
+    async getDataById(photographerId) {
+        let datas=await this.getDatas();
+        return datas.find((data)=>  data.id==photographerId);
+    }
 }

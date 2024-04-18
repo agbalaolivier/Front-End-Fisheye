@@ -33,5 +33,42 @@ export class PhotographerTemplate {
         article.appendChild(price);
         
         return article;
+        
+    
+
     }
-}
+    
+    
+    getDetailsDOM() {
+        const picture = `assets/photographers/Photographers/${this.photographerModel.portrait}`;
+        // Créer le conteneur pour les détails
+        const detailsContainer = document.createElement('div');
+    
+        // Créer la balise img pour afficher la photo du photographe
+        const img = document.createElement('img');
+        img.setAttribute('src', picture);
+        img.setAttribute('alt', this.photographerModel.name);
+        detailsContainer.appendChild(img);
+    
+        // Créer le header avec le nom et la localisation du photographe
+        const header = document.createElement('header');
+        const name = document.createElement('h1');
+        name.textContent = this.photographerModel.name;
+        const location = document.createElement('span');
+        location.textContent = `${this.photographerModel.city}, ${this.photographerModel.country}`;
+        header.appendChild(name);
+        header.appendChild(location);
+        detailsContainer.appendChild(header);
+    
+        // Ajouter la description
+        const description = document.createElement('p');
+        description.textContent = this.photographerModel.description;
+        detailsContainer.appendChild(description);
+    
+        // Retourner le conteneur des détails
+        return detailsContainer;
+    }
+    
+
+    }
+    
