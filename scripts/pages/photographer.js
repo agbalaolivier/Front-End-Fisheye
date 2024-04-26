@@ -1,84 +1,83 @@
+
 import { PhotographerApi } from "../Api/PhotographerApi.js";
 import { MediaApi } from "../Api/MediaApi.js";
 import { PhotographerModel } from "../Model/PhotographerModel.js";
 import { PhotographerTemplate } from "../templates/PhotographerTemplate.js";
+import MediaFactory from "../Factory/MediaFactory.js";
 import MediaTemplate from "../templates/MediaTemplate.js";
 
-
-
-class Photographer {
+class PhotographerApp {
     constructor() {
         this.photographerApi = new PhotographerApi();
         this.mediaApi = new MediaApi();
     }
 
-    async getPhotographer() {
-        // récupération de l'id dans l'adresse
-        const urlParams = new URLSearchParams(window.location.search);
-        const photographerId = urlParams.get('id');
-        
-        //Récupération des données du photographe
-        this.photographerData = await this.photographerApi.getDataById(photographerId);
-
-        //Récupérations des médias du photographe
-        this.mediaDatas = await this.mediaApi.getDatasForOnePhotographe(photographerId);
-        console.log(this.mediaDatas);
-    }
-    
-
-    async displayData() {
-
-        if (this.photographerData && this.photographerData.id) {
-            // Instance de PhotographerModel avec les données du photographe
-            const photographer = new PhotographerModel(this.photographerData);
-    
-           
-    
-            // Instance de PhotographerTemplate avec l'instance de PhotographerModel
-            const photographerTemplate = new PhotographerTemplate(photographer);
-    
-            // Détails du photographe
-            const photographerDetailsDOM = photographerTemplate.getDetailsDOM();
-
-            let mediaModels=[];
-            this.mediaDatas.forEach(media => {
-                mediaModels.push(new MediaFactory(media));
-            });
-            const mediaTemplate=new MediaTemplate(mediaModels);
-            const media=mediaTemplate.showMedia();
-/*
-             // Création du conteneur pour les détails du photographe
-             const photographerDetailsContainer = document.createElement('div');
-             photographerDetailsContainer.classList.add('photographer-container');
-            // Création l'élément img pour l'image du photographe
-            const img = document.createElement('img');
-            img.setAttribute('src', photographer.portrait);
-            img.setAttribute('alt', photographer.name);
-            img.classList.add('photographer-image'); 
-    
-            // Ajout de l'image avant les détails du photographe
-            photographerDetailsContainer.appendChild(img);
-            // Ajouter les détails du photographe au conteneur
-            photographerDetailsContainer.appendChild(photographerDetailsDOM);
-    
-            // Ajout du conteneur au corps du document
-            document.getElementById('main').appendChild(photographerDetailsContainer);
-            */
-        } else {
-            console.error('Error: Photographer data is missing or incomplete.');
+    async initialize() {
+        try {
+            const { photographerData, mediaDatas } = await this.getPhotographerData();
+            this.displayPhotographer(photographerData, mediaDatas);
+        } catch (error) {
+            console.error('An error occurred during initialization:', error);
         }
     }
-    
 
+    async getPhotographerData() {
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const photographerId = urlParams.get('id');
+            const photographerData = await this.photographerApi.getDataById(photographerId);
+            const mediaDatas = await this.mediaApi.getDatasForOnePhotographe(photographerId);
+            return { photographerData, mediaDatas };
+        } catch (error) {
+            console.error('Error fetching photographer data:', error);
+            throw error;
+        }
     }
 
-const app = new Photographer();
-app.getPhotographer().then(() => {
+    displayPhotographer(photographerData, mediaDatas) {
+        try {
+            if (!photographerData || !photographerData.id) {
+                throw new Error('Error: Photographer data is missing or incomplete.');
+            }
+           
     
-    app.displayData();
-});
+            const photographer = new PhotographerModel(photographerData);
+            const photographerTemplate = new PhotographerTemplate(photographer);
+            const photographerPortraitDOM = photographerTemplate.getUserCardDOM1();
+            photographerPortraitDOM.classList.add('photographer-image'); // Ajouter la classe à l'image du photographe
+    
+            const photographerHeaderElement = document.querySelector('.photograph-header');
+            photographerHeaderElement.appendChild(photographerPortraitDOM);
+    
+            const photographerDetailsDOM = photographerTemplate.getDetailsDOM();
+    
+            const mediaModels = mediaDatas.map(media => new MediaFactory(media).getMedia());
+            const mediaTemplate = new MediaTemplate(mediaModels);
+            const mediaDOM = mediaTemplate.showMedia();
+    
+            let photographerContainerElement = document.getElementById('photographer-container');
+            if (!photographerContainerElement) {
+                photographerContainerElement = document.createElement('div');
+                photographerContainerElement.id = 'photographer-container';
+                document.body.appendChild(photographerContainerElement);
+            }
+    
+            // Ajoutez les médias du photographe dans la section principale
+            photographerContainerElement.appendChild(mediaDOM);
+    
+        } catch (error) {
+            console.error('Error displaying photographer data:', error);
+        }
+        
+   
+}
 
 
+}
+    
+
+const app = new PhotographerApp();
+app.initialize();
 
 
         

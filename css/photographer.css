@@ -4,12 +4,27 @@
     
 }
 
-.photograph-header {
+.photograph-header  {
+
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    border: 3px solid red;
+
+
+    }
+
+    .photograph-header  .photographer-image img{
+        height: 200px;
+        width: 200px;
+        border: 3px solid yellow;
+        border-radius: 50% ;
+        cursor: pointer;
+
+        }
     
-}
+    
+
 
 .contact_button {
     font-size: 20px;
@@ -84,15 +99,18 @@ form input {
     
     height: 200px;
     width: 200px;
-    border: 3px solid red;
     border-radius: 50% ;
     cursor: pointer;
 }
 .photographer-container img {
     width: 200px;
     height: auto; 
-    
+       
 }
+
+
+
+
 
 
 
