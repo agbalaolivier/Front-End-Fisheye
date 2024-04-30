@@ -83,7 +83,8 @@ export class PhotographerTemplate {
         const header = document.createElement('header');
         const name = document.createElement('h1');
         name.textContent = this.photographerModel.name;
-        const location = document.createElement('span');
+        const location = document.createElement('span' );
+        
         location.textContent = `${this.photographerModel.city}, ${this.photographerModel.country}`;
         header.appendChild(name);
         header.appendChild(location);

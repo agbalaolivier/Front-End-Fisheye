@@ -1,4 +1,3 @@
-
 import { PhotographerApi } from "../Api/PhotographerApi.js";
 import { MediaApi } from "../Api/MediaApi.js";
 import { PhotographerModel } from "../Model/PhotographerModel.js";
@@ -79,8 +78,3 @@ class PhotographerApp {
 const app = new PhotographerApp();
 app.initialize();
 
-
-        
-    
-
-    

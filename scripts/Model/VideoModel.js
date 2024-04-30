@@ -17,5 +17,7 @@ export default class VideoModel {
         video.alt = this.title;
         return video;
     }
+    
 }
+
 
