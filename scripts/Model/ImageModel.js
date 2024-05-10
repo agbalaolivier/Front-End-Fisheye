@@ -1,22 +1,25 @@
 export default class ImageModel {
-    constructor(image) {
-        const { id, photographerId, title, imageUrl, likes, date , price} = image;
+    constructor(data, photographerModel) {
+        const { id, photographerId, title, image, likes, date , price} = data;
 
         this.id = id;
         this.photographerId = photographerId;
         this.title = title;
-        this.image = imageUrl;
+        this.image = image;
         this.likes = likes;
         this.date = date;
         this.price = price;
+
+        this.photographerModel=photographerModel;
     }
 
     showMedia() {
         let img = document.createElement('img');
-        img.src = this.image;
+        
+        console.log(this.photographerModel);
+        img.src = './assets/photographers/' + this.photographerModel.getFirstName() + '/' + this.image;
         img.alt = this.title;
-        img.width = 300; // Définissez une largeur appropriée
-        img.height = 200; // Définissez une hauteur appropriée
+        
         return img;
     }
 

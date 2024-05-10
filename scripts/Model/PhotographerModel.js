@@ -10,16 +10,12 @@ export class PhotographerModel {
         this.price=price;
         this.portrait=portrait;
     }
+
+    getFirstName(){
+    
+        
+        return (this.name.split(' ')[0]).replace('-',' ');
+       
+
+    }
 }
-const photographerData = {
-    id: 1,
-    name: "John Doe",
-    city: "Paris",
-    country: "France",
-    tagline: "Capturing moments",
-    price: 100,
-    portrait: "url/to/portrait.jpg"
-  };
-  
-  const photographer = new PhotographerModel(photographerData);
-  console.log(photographer);

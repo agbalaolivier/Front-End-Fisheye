@@ -50,20 +50,28 @@ export class PhotographerTemplate {
         const h1 = document.createElement('h1');
         h1.textContent = this.photographerModel.name;
 
+        const textDetail = document.createElement('div');
+        textDetail.classList.add('textDetail')
+
         const cityCountry = document.createElement('span');
         cityCountry.classList.add("cityCountry");
         cityCountry.textContent = `${this.photographerModel.city}, ${this.photographerModel.country}`;
 
         
-        const tagline = document.createElement('span'); 
+        const tagline = document.createElement('span');
+        tagline.classList.add("tagline") 
         tagline.textContent = this.photographerModel.tagline;
         
         article.appendChild(img);
         article.appendChild(h1  );
-        article.appendChild(cityCountry);
-        article.appendChild(tagline);
+        article.appendChild(textDetail);
+        textDetail.appendChild(cityCountry)
+        textDetail.appendChild(tagline)
+        
+        
         
         return article;
+        
     }
     
     

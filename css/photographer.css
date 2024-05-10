@@ -1,105 +1,127 @@
-#contact_modal {
-    display: none;
-
-    
-}
-
-.photograph-header  {
-    display: flex;
-    justify-content: space-between;
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
-    border: 3px solid red;
-
-
-    }
-
-
-
-     .photographer-image h1{
-        font-size: 36px;
-        color: #D3573C;
-        position: absolute;
-        top: 20%;
-        
-    
-        }
-        .photographer-image img{
-            display: flex;
-            
-            height: 200px;
-            width: 200px;
-            border: 3px solid yellow;
-            border-radius: 50% ;
-            cursor: pointer;
-            position: absolute;
-            left: 70%;
-            bottom: 19em;
-            
-        
-        }
-    
-    
-
-
-.contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
-    border: 4px solid blue;
-    position: absolute;
-    left: 45%;
-    top: 30%
-    
-}
-
-.modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
-    border: 1px solid green;
-
-}
-
-.modal header {
-    justify-content: space-between;
+#main{
     width: 100%;
 }
 
-.modal header img {
-    cursor: pointer;
-}
+#contact_modal {
+  display: none;
+  z-index: 9999; /* Assure que le modal est au-dessus de tout le reste */
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+   
 
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
-}
+   
 
+   
+
+    
+    
+
+    
+    .modal {
+    
+        border-radius: 5px;
+        background-color: #DB8876;
+        width: 70%;
+        max-width: 500px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        margin: auto;
+    
+    
+    
+     }
+
+
+
+        
+        
+        
+
+        
+        .modal form .contact_button{
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            padding: 11px;
+            width: 170px;
+            height: 70px;
+            background-color: #901C1C;
+            border-radius: 5px;
+            
+            
+    
+        }
+        
+    
+
+    
+        .modal header {
+            position: relative;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 5px;
+        
+
+            }
+            .modal header img {
+                cursor: pointer;
+                position: absolute;
+                top: 0;
+                right: 0;
+                
+                
+            
+            }
+
+            .modal header h2 {
+                font-size: 30px;
+                font-weight: normal;
+                position: absolute;
+                left: 0;
+                
+
+                
+                }
+                .photographer-name {
+                    display: block;
+                    font-size: 32px;
+                    color: #901C1C;
+                }
+               
+                
+    
+        
+
+        
+        
+            
+        
+        
+        
+            
+        
+        
+        
 form {
     display: flex;
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
+    margin: 10px;
 }
 
 form label {
     color: #312E2E;
-    font-size: 36px;
+    font-size: 20px;
+    
+
 }
 
 form div {
@@ -112,28 +134,237 @@ form div {
 
 form input {
     width: 100%;
-    height: 68px;
+    height: 30px;
     border: none;
     border-radius: 5px;
 }
-.photographer-container{
+
+
+
+
+}
+#lightbox{
+    width: 1242px;
+    height: 900px;
+
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fond semi-transparent */
+    z-index: 9999; /* Assure que le lightbox est au-dessus de tout le reste */
+    overflow: auto; /* Permet le défilement si le contenu est plus grand que l'écran */
+}
+
+
+#lightbox-media{
+    width: 1242px;
+    height: 900px;
+    display: block;
+    margin: auto;
+    max-width: 80%; /* Ajustez la taille de l'image selon vos besoins */
+    max-height: 80vh; /* Limitez la hauteur pour éviter le débordement */
+}
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.lightbox-close:hover {
+    color: #ccc; /* Change la couleur au survol */
+}
+
+
+    
+
+
+
+
+
+
+
+
+        
+        
+    
+    
+    
+
+    
+
+
+.photograph-header  {
+    display: flex;
+    justify-content: space-between;
+    background-color: #FAFAFA;
+    height: 300px;
+    margin: 0 100px;
+
+
+.photographer-image{
+    
+
+      h1{
+        font-size: 36px;
+        color: #D3573C;
+        position: absolute;
+        top: 20%;
+        
+    
+        }
+         img{
+            display: flex;
+            height: 200px;
+            width: 200px;
+            border-radius: 50% ;
+            cursor: pointer;
+            position: absolute;
+            left: 70%;
+            bottom: 19em;
+            
+        
+        }
+        .textDetail{
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            top: 40%;
+            line-height: 2;
+            .cityCountry{
+            color: #D3573C;
+            
+            }
+         }
+         
+
+         }
+
+ 
+ .contact_button {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    left: 45%;
+    top: 30%
+    
+    
+}
+
+
+}
+
+.photographer-container {
+    
     
     height: 200px;
     width: 200px;
     border-radius: 50% ;
     cursor: pointer;
+    
+
 }
 .photographer-container img {
     width: 200px;
-    height: auto; 
+    height: auto;
+     }
+    
+
+    .media-container {
+    
+        display: flex;
+        flex-wrap: wrap;
+        margin: 15px;
+        padding: 15px;
+        justify-content: space-between;
+        
+
+        }
+            
+    
+    .media-container img,
+     .media-container video {
+        width: 350px;
+        height: 351px;
+        cursor: pointer;
+    }
        
-}
-.media-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 20px; /* ou toute autre marge souhaitée */
-}
+           .media-wrapper {
+            display: flex;
+            flex-direction: column;
+            margin: 10px;
+           
+        }
+        .title-like-container{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        
+            
+        }
+        .title-like-container p{
+            color: red;
+
+            }
+            
+        
+    
+   
+    .red-heart{
+        color: #901C1C;
+    }
+    .like-button{
+        border: none;
+        color: transparent;
+        width: 35px;
+       cursor: pointer;  
+     
+    }
+    .like-count{
+        color: #901C1C;
+        margin-left: auto;
+        margin-top: 1em;
+        
+
+
+    }
+    
+    
+
+
+    
+        
+
+        
+        
+
+
+        
+    
+     
+ 
+    
+
+    
+       
+
+
+
+
+
+
 
 
 
