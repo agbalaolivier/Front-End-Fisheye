@@ -143,42 +143,6 @@ form input {
 
 
 }
-#lightbox{
-    width: 1242px;
-    height: 900px;
-
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fond semi-transparent */
-    z-index: 9999; /* Assure que le lightbox est au-dessus de tout le reste */
-    overflow: auto; /* Permet le défilement si le contenu est plus grand que l'écran */
-}
-
-
-#lightbox-media{
-    width: 1242px;
-    height: 900px;
-    display: block;
-    margin: auto;
-    max-width: 80%; /* Ajustez la taille de l'image selon vos besoins */
-    max-height: 80vh; /* Limitez la hauteur pour éviter le débordement */
-}
-.lightbox-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.lightbox-close:hover {
-    color: #ccc; /* Change la couleur au survol */
-}
 
 
     
@@ -236,9 +200,17 @@ form input {
             position: relative;
             top: 40%;
             line-height: 2;
+
             .cityCountry{
-            color: #D3573C;
+            color: #901C1C;
+            font-size: 24px;
+            font-weight: 400;
             
+            }
+            .tagline{
+               color: #525252;
+               font-weight: 400;
+               font-size: 18px;
             }
          }
          
@@ -299,6 +271,7 @@ form input {
         width: 350px;
         height: 351px;
         cursor: pointer;
+
     }
        
            .media-wrapper {
@@ -315,7 +288,10 @@ form input {
             
         }
         .title-like-container p{
-            color: red;
+            color: #901C1C;
+            font-size: 18px;
+            font-weight: 400;
+            
 
             }
             
@@ -327,7 +303,7 @@ form input {
     }
     .like-button{
         border: none;
-        color: transparent;
+        background-color: transparent;
         width: 35px;
        cursor: pointer;  
      
@@ -340,6 +316,90 @@ form input {
 
 
     }
+    #lightbox{
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8); /* Fond semi-transparent */
+        z-index: 9999; /* Assure que le lightbox est au-dessus de tout le reste */
+        overflow: auto; /* Permet le défilement si le contenu est plus grand que l'écran */
+    }
+    
+    
+    #lightbox-media{
+        display: block;
+        margin: auto;
+        max-width: 100%; /* Ajustez la taille de l'image selon vos besoins */
+        max-height: 100%; /* Limitez la hauteur pour éviter le débordement */
+    }
+    .close-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 24px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: red;
+    }
+    .close-button img {
+        width: 25px; /* Ajustez la taille de l'icône */
+        height: 25px; /* Ajustez la taille de l'icône */
+    }
+    .prev-button, .next-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        top: 50%; /* Centrer verticalement */
+        transform: translateY(-50%); /* Ajustement pour le centrage vertical */
+    }
+    .prev-button {
+        left: 10px; /* Positionner à gauche */
+    }
+    
+    .next-button {
+        right: 10px; /* Positionner à droite */
+    }
+    
+    .prev-button i, .next-button i {
+        font-size: 24px; /* Ajustez la taille de l'icône */
+        color: white; /* Ajustez la couleur de l'icône */
+    }
+
+    /* triage option*/
+    .option-container{
+        cursor: pointer;
+        font-size:20px ;
+        font-weight: 700;
+        margin-left: 37px;
+        
+       
+        
+
+    }
+    
+
+.sort-by-title,
+.sort-by-popularity
+  { width: 170px;
+    height: 69px;
+    padding: 10px;
+    margin-left: 6em;
+    background-color: #901C1C;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    color: white;
+
+}
+
+
+
+
     
     
 

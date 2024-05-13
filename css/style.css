@@ -43,22 +43,28 @@ h1 {
     
 }
 
-.photographer_section article h2 {
+.photographer_section  h2 {
     color: #D3573C;
-    font-size: 36px;
+    font-size: 32px;
+    font-weight: 400;
+    
     
 }
-.photographer_section article .cityCountry{
-    color: #D3573C;
-    font-weight: 700;
+
+.photographer_section  .cityCountry{
+    color: #901C1C;
+    font-weight: 400;
+    font-size: 18px;
     margin: 0;
     padding: 0;
 }
-.photographer_section article span {
-    font-size: 10px;
+.photographer_section span{
+    font-size: 12px;
 }
 
-.photographer_section article img  {
+
+
+.photographer_section  img  {
     height: 200px;
     width: 200px;
     border-radius: 50% ;
