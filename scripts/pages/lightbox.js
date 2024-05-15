@@ -15,7 +15,7 @@ export default class Lightbox {
 
         this.closeButton = document.createElement('button');
         this.closeButton.classList.add('close-button');
-        this.closeButton.innerHTML = '<img src="assets/icons/close.svg" />';
+        this.closeButton.innerHTML = '<i class="fas fa-times"></i>';
         this.lightbox.appendChild(this.closeButton);
 
          // Création du bouton précédent
