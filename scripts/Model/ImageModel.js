@@ -19,6 +19,9 @@ export default class ImageModel {
         console.log(this.photographerModel);
         img.src = './assets/photographers/' + this.photographerModel.getFirstName() + '/' + this.image;
         img.alt = this.title;
+        img.tabIndex = 0;
+        
+        
         
         return img;
     }

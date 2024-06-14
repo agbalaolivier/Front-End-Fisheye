@@ -18,6 +18,9 @@ export default class VideoModel {
         console.log(this.photographerModel)
         video.src = './assets/photographers/' + this.photographerModel.getFirstName() + '/' + this.video;
         video.alt = this.title;
+        video.tabIndex = 0;
+        
+        
         
         return video;
     }

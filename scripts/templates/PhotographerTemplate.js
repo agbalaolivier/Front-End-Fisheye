@@ -37,7 +37,18 @@ export class PhotographerTemplate {
     
 
     }
-    getUserCardDOM1(){
+    renderForPagePhotographer(){
+
+        const headerHTML = document.querySelector('.photograph-header');
+        if (!headerHTML) {
+            headerHTML = document.createElement('header');
+            headerHTML.classList.add('photograph-header');
+            document.body.appendChild(headerHTML);
+        }
+
+        
+        
+
         const picture = `assets/photographers/Photographers/${this.photographerModel.portrait}`;
         
         const article = document.createElement('article');
@@ -68,9 +79,12 @@ export class PhotographerTemplate {
         textDetail.appendChild(cityCountry)
         textDetail.appendChild(tagline)
         
-        
-        
-        return article;
+        article.classList.add('photographer-image');
+
+        headerHTML.appendChild(article);
+
+        const contactHeader = document.querySelector('.modal header h2');
+        contactHeader.innerHTML = `Contactez-moi <div class="photographer-name">${this.photographerModel.name}</div>`;
         
     }
     
@@ -85,7 +99,15 @@ export class PhotographerTemplate {
         const img = document.createElement('img');
         img.setAttribute('src', picture);
         img.setAttribute('alt', this.photographerModel.name);
+        img.setAttribute('tabIndex')
+
+        const video = document.createElement('video');
+        video.setAttribute('src', picture);
+        video.setAttribute('alt', this.photographerModel.name);
+        video.setAttribute('tabIndex')
+        
         detailsContainer.appendChild(img);
+        detailsContainer.appendChild(video);
     
         // Créer le header avec le nom et la localisation du photographe
         const header = document.createElement('header');
