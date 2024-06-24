@@ -152,7 +152,10 @@ form input {
 .photographer-image{
     
 
-      h1{
+    
+    
+
+       h1{
         font-size: 36px;
         color: #D3573C;
         position: absolute;
@@ -194,6 +197,27 @@ form input {
          
 
          }
+         
+
+         
+         /* Media queries pour ajuster les styles sur les petits écrans */
+@media (max-width: 768px) {
+    .photographer-image h1,
+    .photographer-image .textDetail .cityCountry,
+    .photographer-image .textDetail .tagline {
+        font-size: 20px; /* Réduction de la taille de la police pour les petits écrans */
+    }
+
+    .photographer-image img {
+        height: 150px;
+        width: 150px;
+        bottom: 8em; /* Ajustement du positionnement */
+    }
+
+    .photographer-image .textDetail {
+        top: 50%; /* Ajustement pour le positionnement du texte */
+    }
+}
 
  
  .contact_button {
@@ -297,7 +321,8 @@ form input {
     /* lightbax*/
 
     #lightbox{
-        display: none;
+        display: flex;
+        flex-direction: column;
         position: fixed;
         top: 0;
         left: 0;
@@ -305,35 +330,53 @@ form input {
         height: 100%;
         background-color: rgba(225, 225, 225, 1); 
         z-index: 9999; 
+        justify-content: center;
+        align-items: center;
         overflow: auto;
-        border: 3px solid blue;
+        margin: auto;
+        
 
         
     }
     
     
     #lightbox-media{
-        display: block;
-        margin: auto;
-        max-width: 900px;
-        max-height: 900px;
-    border: 3px solid red;
-        
-        
-
-        }
-
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    max-width: 100%; 
+    max-height: 80vh; 
+    margin: auto; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+}
     
-    #lightbox-title{
+
+        
+    
+            
+             
+
+        
+        #lightbox-title{
 
         color: #901C1C;
-            font-size: 18px;
-            font-weight: 400;
-            margin-bottom: 6em;
-            
+        font-size: 18px;
+        font-weight: 400;
+        max-width: 80%;
+        word-wrap: break-word;
+        position: absolute;
+        left: 3%;
+        bottom: 23px; 
+        
+        
+    }
+    
 
-            }
-
+    
+    
     
     .close-button {
         position: absolute;
@@ -401,6 +444,9 @@ form input {
         
 
 }
+
+
+
 
 
 
