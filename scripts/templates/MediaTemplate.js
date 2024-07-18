@@ -48,10 +48,24 @@ export default class MediaTemplate {
 
             // Ajouter des événements pour incrémenter le nombre de likes lorsque le bouton est cliqué
             likeButton.addEventListener('click', () => {
-                // Mettre à jour le nombre de likes dans le modèle de média
-                media.likes++;
-                // Mettre à jour le contenu du span pour refléter le nouveau nombre de likes
-                likeCount.textContent = media.likes;
+                if (media.liked) {
+                    // Décrémenter le nombre de likes dans le modèle de média
+                    media.likes--;
+                    // Mettre à jour l'état de "liked"
+                    media.liked = false;
+                    // Mettre à jour le contenu du span pour refléter le nouveau nombre de likes
+                    likeCount.textContent = media.likes;
+                    
+                } else {
+                    // Incrémenter le nombre de likes dans le modèle de média
+                    media.likes++;
+                    // Mettre à jour l'état de "liked"
+                    media.liked = true;
+                    // Mettre à jour le contenu du span pour refléter le nouveau nombre de likes
+                    likeCount.textContent = media.likes;
+                    
+                }
+               
             });
 
             // Ajouter le nom du média et le bouton "Like" dans le conteneur

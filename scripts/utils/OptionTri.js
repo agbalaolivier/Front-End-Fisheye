@@ -2,50 +2,87 @@ import MediaTemplate from "../templates/MediaTemplate.js";
 
 export default class OptionTri {
     constructor(photographerData, mediasModel, parent) {
-        this.mediasModel = mediasModel;
         this.photographerData = photographerData;
+        this.mediasModel = mediasModel;
         this.parent = parent;
         this.render();
     }
 
     render() {
-
-
         const optionsContainer = document.createElement('div');
         optionsContainer.classList.add('options-container');
-        optionsContainer.style.display='none';
-        
 
         const sortOptionsContainer = document.createElement('div');
         sortOptionsContainer.classList.add('option-container');
-        console.log(sortOptionsContainer);
-        sortOptionsContainer.textContent = 'Trier par';
+        sortOptionsContainer.textContent = 'Trier par : ';
         sortOptionsContainer.addEventListener('click', () => {
-        optionsContainer.style.display = optionsContainer.style.display === 'none' ? 'block' : 'none';
+            this.toggleVisibility(sortOptionsContainer);
+            this.toggleArrowIcon(mainSortButton);
         });
 
-        const sortByPopularityButton = document.createElement('button');
-        sortByPopularityButton.classList.add('sort-by-popularity');
-        sortByPopularityButton.textContent = 'Popularité';
-        sortByPopularityButton.addEventListener('click', () => this.sortMedia('popularity'));
+        // Création des boutons de tri
+        const sortByPopularityButton = this.createSortButton('Popularité', 'popularity');
+        const sortByDateButton = this.createSortButton('Date', 'date');
+        const sortByTitleButton = this.createSortButton('Titre', 'title');
 
-        const sortByDateButton = document.createElement('button');
-        sortByDateButton.classList.add('sort-by-date');
-        sortByDateButton.textContent = 'Date';
-        sortByDateButton.addEventListener('click', () => this.sortMedia('date'));
+        // Bouton principal avec icône de flèche
+        const mainSortButton = this.createSortButton('Popularité', 'popularity');
+        mainSortButton.innerHTML = 'Popularité <i class="fas fa-chevron-down"></i>'; // Texte par défaut avec icône
+        mainSortButton.classList.add('sort-by-default', 'active-sort');
 
-        const sortByTitleButton = document.createElement('button');
-        sortByTitleButton.classList.add('sort-by-title');
-        sortByTitleButton.textContent = 'Titre';
-        sortByTitleButton.addEventListener('click', () => this.sortMedia('title'));
+        
 
-        optionsContainer.appendChild(sortByPopularityButton);
-        optionsContainer.appendChild(sortByDateButton);
-        optionsContainer.appendChild(sortByTitleButton);
+        
 
-        sortOptionsContainer.appendChild(optionsContainer);
+        // Initialiser les boutons de tri comme cachés
+        sortByPopularityButton.style.display = 'none';
+        sortByDateButton.style.display = 'none';
+        sortByTitleButton.style.display = 'none';
 
-        (this.parent.parentNode).insertBefore(sortOptionsContainer,this.parent);
+        sortOptionsContainer.appendChild(mainSortButton);
+        sortOptionsContainer.appendChild(sortByPopularityButton);
+        sortOptionsContainer.appendChild(sortByDateButton);
+        sortOptionsContainer.appendChild(sortByTitleButton);
+
+        optionsContainer.appendChild(sortOptionsContainer);
+        this.parent.parentNode.insertBefore(optionsContainer, this.parent);
+
+        // Ajouter un élément pour afficher le nombre total de likes et le prix par jour
+        const infoContainer = document.createElement('div');
+        infoContainer.classList.add('info-container');
+
+        this.totalLikesElement = document.createElement('div');
+        this.totalLikesElement.classList.add('total-likes');
+        infoContainer.appendChild(this.totalLikesElement);
+
+        this.priceElement = document.createElement('div');
+        this.priceElement.classList.add('price');
+        this.priceElement.textContent = `${this.photographerData.price}€ / jour`;
+        infoContainer.appendChild(this.priceElement);
+
+       optionsContainer.appendChild(infoContainer);
+
+        
+
+
+ 
+
+        // Initialiser les valeurs
+        this.updateTotalLikes();
+    }
+
+    createSortButton(text, criteria) {
+        const button = document.createElement('button');
+        button.textContent = text;
+        button.classList.add(`sort-by-${criteria}`);
+        button.addEventListener('click', () => {
+            this.sortMedia(criteria);
+            this.updateTotalLikes();
+            // Mettre à jour le texte du bouton principal pour refléter le critère actif
+            document.querySelector('.active-sort').innerHTML = `${text} <i class="fas fa-chevron-up"></i>`;
+            this.toggleVisibility(); // Masquer les options après sélection
+        });
+        return button;
     }
 
     sortMedia(criteria) {
@@ -65,6 +102,24 @@ export default class OptionTri {
         const mediaTemplate = new MediaTemplate(this.mediasModel);
         mediaTemplate.showMedia();
     }
-    
 
+    updateTotalLikes() {
+        if (!this.totalLikesElement) return;
+        const totalLikes = this.mediasModel.reduce((sum, media) => sum + media.likes, 0);
+        this.totalLikesElement.innerHTML = ` ${totalLikes}<i class="fas fa-heart"></i> `;
     }
+
+    toggleVisibility(container) {
+        // Toggle la visibilité des boutons de tri dans le conteneur
+        const buttons = container.querySelectorAll('.option-container button');
+        buttons.forEach(button => {
+            button.style.display = button.style.display === 'none' ? 'block' : 'none';
+        });
+    }
+    toggleArrowIcon(button) {
+        const icon = button.querySelector('i');
+        icon.classList.toggle('fa-chevron-down');
+        icon.classList.toggle('fa-chevron-up');
+        
+    }
+}

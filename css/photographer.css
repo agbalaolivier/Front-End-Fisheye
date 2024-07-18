@@ -406,12 +406,11 @@ form input {
         margin-left: 37px;   
 
     }
-    
+    .sort-by-popularity,
+    .sort-by-date,
+    .sort-by-title{
 
-    .sort-by-title,
-     .sort-by-popularity,
-     .sort-by-date
-      { width: 170px;
+        width: 170px;
         height: 69px;
         font-weight: 400;
         margin-left: 6em;
@@ -422,9 +421,29 @@ form input {
         color: white;
         justify-content: center;
         align-items: center;
-        
-
 }
+.info-container{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: #DB8876;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+.total-likes, .price {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+
+
 
 
 
